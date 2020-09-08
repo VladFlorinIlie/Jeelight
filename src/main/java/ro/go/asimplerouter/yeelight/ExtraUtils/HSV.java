@@ -1,4 +1,4 @@
-package me.antony.yeelight.ExtraUtils;
+package src.main.java.ro.go.asimplerouter.yeelight.ExtraUtils;
 
 public class HSV {
 

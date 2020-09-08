@@ -2,6 +2,8 @@
 
 A Java library for controlling Yeelight LED smart lights.
 
+Based on Jeelight library by Antony1060 - https://github.com/Antony1060/Jeelight
+
 ## Installation
 
 Download the first thing in releases

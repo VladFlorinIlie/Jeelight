@@ -1,4 +1,4 @@
-package me.antony.yeelight;
+package src.main.java.ro.go.asimplerouter.yeelight;
 
 import java.io.BufferedReader;
 import java.io.IOException;

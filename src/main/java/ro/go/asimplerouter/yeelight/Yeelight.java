@@ -1,9 +1,9 @@
-package me.antony.yeelight;
+package src.main.java.ro.go.asimplerouter.yeelight;
 
-import me.antony.yeelight.ExtraUtils.Effect;
-import me.antony.yeelight.ExtraUtils.HSV;
-import me.antony.yeelight.ExtraUtils.RGB;
-import me.antony.yeelight.Handlers.*;
+import src.main.java.ro.go.asimplerouter.yeelight.ExtraUtils.Effect;
+import src.main.java.ro.go.asimplerouter.yeelight.ExtraUtils.HSV;
+import src.main.java.ro.go.asimplerouter.yeelight.ExtraUtils.RGB;
+import src.main.java.ro.go.asimplerouter.yeelight.Handlers.*;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -39,7 +39,7 @@ public class Yeelight {
     }
 
     public String toggle() {
-        return me.antony.yeelight.Handlers.toggle.run();
+        return src.main.java.ro.go.asimplerouter.yeelight.Handlers.toggle.run();
     }
 
     public String setName(String name) {
