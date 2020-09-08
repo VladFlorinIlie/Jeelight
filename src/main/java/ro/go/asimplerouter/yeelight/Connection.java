@@ -1,4 +1,4 @@
-package src.main.java.ro.go.asimplerouter.yeelight;
+package ro.go.asimplerouter.yeelight;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,10 +25,8 @@ public class Connection {
             in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             this.ip = ip;
             this.port = port;
-            return;
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
     }
 
@@ -39,17 +37,14 @@ public class Connection {
     public String send(String data) {
         out.println(data);
         try {
-            String response = in.readLine();
-            return response;
+            return in.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public void recieve() {
-        return;
-    }
+    public void receive() { }
 
     public void stop() {
         try {
@@ -59,6 +54,5 @@ public class Connection {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return;
     }
 }

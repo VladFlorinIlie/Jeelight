@@ -1,7 +1,7 @@
-package src.main.java.ro.go.asimplerouter.examples;
+package ro.go.asimplerouter.examples;
 
-import src.main.java.ro.go.asimplerouter.yeelight.ExtraUtils.Effect;
-import src.main.java.ro.go.asimplerouter.yeelight.Yeelight;
+import ro.go.asimplerouter.yeelight.utils.Effect;
+import ro.go.asimplerouter.yeelight.Yeelight;
 
 
 public class Main {

@@ -1,4 +1,4 @@
-package src.main.java.ro.go.asimplerouter.yeelight.ExtraUtils;
+package ro.go.asimplerouter.yeelight.utils;
 
 public class RGB {
 

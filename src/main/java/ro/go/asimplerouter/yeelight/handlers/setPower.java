@@ -1,10 +1,10 @@
-package src.main.java.ro.go.asimplerouter.yeelight.Handlers;
+package ro.go.asimplerouter.yeelight.handlers;
 
-import src.main.java.ro.go.asimplerouter.yeelight.Connection;
-import src.main.java.ro.go.asimplerouter.yeelight.ExtraUtils.CommandBuilder;
-import src.main.java.ro.go.asimplerouter.yeelight.ExtraUtils.Effect;
-import src.main.java.ro.go.asimplerouter.yeelight.ExtraUtils.Method;
-import src.main.java.ro.go.asimplerouter.yeelight.Yeelight;
+import ro.go.asimplerouter.yeelight.Connection;
+import ro.go.asimplerouter.yeelight.utils.CommandBuilder;
+import ro.go.asimplerouter.yeelight.utils.Effect;
+import ro.go.asimplerouter.yeelight.utils.Method;
+import ro.go.asimplerouter.yeelight.Yeelight;
 
 public class setPower {
 
