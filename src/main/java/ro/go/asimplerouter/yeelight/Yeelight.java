@@ -6,10 +6,9 @@ import ro.go.asimplerouter.yeelight.utils.RGB;
 import ro.go.asimplerouter.yeelight.handlers.*;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.Socket;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 public class Yeelight {
@@ -50,21 +49,47 @@ public class Yeelight {
         return setDefault.run();
     }
 
+    public static List<NetworkInterface> getMulticastInterfaces() throws SocketException {
+        List<NetworkInterface> viableInterfaces = new ArrayList<NetworkInterface>();
+        Enumeration e = NetworkInterface.getNetworkInterfaces();
+        while (e.hasMoreElements()) {
+            NetworkInterface n = (NetworkInterface) e.nextElement();
+            Enumeration ee = n.getInetAddresses();
+            while (ee.hasMoreElements()) {
+                InetAddress i = (InetAddress) ee.nextElement();
+                if (i.isSiteLocalAddress() && !i.isAnyLocalAddress() && !i.isLinkLocalAddress()
+                        && !i.isLoopbackAddress() && !i.isMulticastAddress()) {
+                    viableInterfaces.add(NetworkInterface.getByName(n.getName()));
+                }
+            }
+        }
+        return viableInterfaces;
+    }
+
     public static List<Yeelight> discover() throws IOException {
         /* create byte arrays to hold our send and response data */
         byte[] sendData;
         byte[] receiveData = new byte[65535];
 
         /* our M-SEARCH data as a byte array */
-        String MSEARCH = "M-SEARCH * HTTP/1.1\nHost: 239.255.255.250:1900\nMan: \"ssdp:discover\"\nST: wifi_bulb\n";
+        String MSEARCH = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1982\r\nMAN: \"ssdp:discover\"\r\nST: wifi_bulb\r\n";
         sendData = MSEARCH.getBytes();
 
         /* create a packet from our data destined for 239.255.255.250:1900 */
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("239.255.255.250"), 1982);
 
         /* send packet to the socket we're creating */
-        DatagramSocket clientSocket = new DatagramSocket(1982);
-        clientSocket.send(sendPacket);
+        MulticastSocket clientSocket = new MulticastSocket(1982);
+
+        List<NetworkInterface> interfaces = getMulticastInterfaces();
+        if (interfaces != null && interfaces.size() > 0) {
+            for (NetworkInterface iface : interfaces) {
+                clientSocket.setNetworkInterface(iface);
+                clientSocket.send(sendPacket);
+            }
+        } else {
+            clientSocket.send(sendPacket);
+        }
 
         /* recieve response and store in our receivePacket */
         System.out.println("ok");

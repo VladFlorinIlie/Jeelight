@@ -3,27 +3,26 @@ package ro.go.asimplerouter.yeelight.utils;
 
 public class CommandBuilder {
 
+    private CommandBuilder() {}
+
     public static String build(Method method, Object... args) {
-        String params = "[";
+        StringBuilder params = new StringBuilder("[");
         for (int i = 0; i < args.length; i++) {
-            if (args[i] instanceof String) {
-                params += "\"";
+            boolean str = args[i] instanceof String;
+            if (str) {
+                params.append("\"");
             }
-            if (i == args.length - 1) {
-                params += String.valueOf(args[i]);
-                if (args[i] instanceof String) {
-                    params += "\"";
-                }
-            } else {
-                params += String.valueOf(args[i]);
-                if (args[i] instanceof String) {
-                    params += "\"";
-                }
-                params += ", ";
+
+            params.append(args[i]);
+            if (str) {
+                params.append("\"");
+            }
+
+            if (i < args.length - 1) {
+                params.append(", ");
             }
         }
-        params += "]";
-        String command = "{\"id\":1, \"method\":\"" + Method.toString(method) + "\", \"params\":" + params + "}";
-        return command;
+        params.append("]");
+        return "{\"id\":1, \"method\":\"" + Method.toString(method) + "\", \"params\":" + params + "}";
     }
 }
